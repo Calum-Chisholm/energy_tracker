@@ -1,9 +1,9 @@
 <template lang="html">
   <!-- <GChart></GChart> -->
   <GChart
-    type="ColumnChart"
-    :data='chartData'
-    :options='chartOptions'
+  type="ColumnChart"
+  :data='formattedData'
+  :options='chartOptions'
   />
 
 </template>
@@ -15,22 +15,23 @@ export default {
   name: 'energy-display',
   data(){
     return {
-      chartData: [
-      ],
       chartOptions: {
         chart: {
-          title: 'Company Performance',
-          subtitle: 'Sales, Expemses and Profit: 2014: 2015',
-        }
-      },
-      computed: {
-        formattedData: function() {
-          const formattedData = this.energyStats.data.generationmix.map((fuelObject) => {
-            return [fuelObject.fuel, fuelObject.perc]
-          })
-          return formattedData.unshift(['Fuel', 'Percentage'])
+          title: 'Energy Usage Percentages',
+          subtitle: 'Energy Usage by Percentage',
         }
       }
+    }
+  },
+  computed: {
+    formattedData: function() {
+      if (!this.energyStats) return;
+
+      const formattedData = this.energyStats.data.generationmix.map((fuelObject) => {
+        return [fuelObject.fuel, fuelObject.perc]
+      })
+      formattedData.unshift(['Fuel', 'Percentage'])
+      return formattedData
     }
   },
   components: {
