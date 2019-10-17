@@ -1,10 +1,12 @@
 <template lang="html">
   <!-- <GChart></GChart> -->
+
   <GChart
-  type="ColumnChart"
+  type="PieChart"
   :data='formattedData'
   :options='chartOptions'
-  />
+  class="chart"/>
+
 
 </template>
 
@@ -43,4 +45,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
+  .chart {
+    width: 100%
+  }
+
 </style>
