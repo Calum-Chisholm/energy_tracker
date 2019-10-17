@@ -23,9 +23,18 @@ export default {
     .then(data => this.energyStats = data);
 
     eventBus.$on('selected-dates', (dates) => {
-      this.selectedDates = dates
+      this.selectedDates = dates;
+      this.selectedDatesCall();
+
     })
   },
+  methods: {
+    selectedDatesCall () {
+        fetch(`https://api.carbonintensity.org.uk/generation/${this.selectedDates.from}/${this.selectedDates.to}`)
+        .then(res => res.json())
+        .then(data => this.energyStats = data)
+      }
+    },
   components: {
     'energy-controls': energyControls
   }
