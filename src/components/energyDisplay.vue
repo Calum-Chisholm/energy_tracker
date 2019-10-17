@@ -16,16 +16,20 @@ export default {
   data(){
     return {
       chartData: [
-        ['Year', 'sales', 'expenses', 'profit'],
-        ['2014', 1000, 400, 200],
-        ['2015', 1170, 460, 250]
+        this.formattedData
       ],
       chartOptions: {
         chart: {
           title: 'Company Performance',
           subtitle: 'Sales, Expemses and Profit: 2014: 2015',
         }
-      }      
+      },
+      formattedData: function() {
+        const formattedData = this.energyStats.data.generationmix.map((fuelObject) => {
+          return [fuelObject.fuel, fuelObject.perc]
+        })
+        return formattedData.unshift(['Fuel', 'Percentage'])
+      }
     }
   },
   components: {
